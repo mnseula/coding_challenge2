@@ -4,29 +4,67 @@ import './Board.css'
 function Board() {
     const [cells,setCells] = useState(Array(9).fill(''))
      
-    const handleClick = (num) => {
+    const handleClick = (num,color) => {
         let clickedCells = [...cells];
 
-        // if(clickedCells[num] !== ''){
-        //     return;
-        // }
-        if ((num % 2) == 0 ) {
-            clickedCells[num] = 'whitecell';
-        } else {
-            clickedCells[num] = 'blackcell'
+        if (color === 'whitecell') {
+            if(num === 6 || num === 7 || num === 8){
+                return;
+            }
+            if ((num % 2) == 0 ) {
+                clickedCells[num] = 'blackcell';
+            } 
+            
+            else if (((num % 2)) == 1 ) {
+                clickedCells[num] = 'blackcell';
+            } 
+            
+            else {
+            }
+            setCells(clickedCells);
+
+        }
+        else if (color === 'blackcell') {
+            if(num === 0 || num === 1 || num === 2){
+                return;
+            }
+            if ((num % 2) == 0 ) {
+                clickedCells[num] = 'whitecell';
+            } 
+            
+            else if (((num % 2)) == 1 ) {
+                clickedCells[num] = 'whitecell';
+            } 
+            
+            else {
+            }
+            setCells(clickedCells);
+
+        }
+        else {
+
         }
         
-        setCells(clickedCells);
-        console.log(clickedCells);
     };
   
-    const Cell = ({ num }) => {
-        if ((num % 2) == 0 ) {
-            return <td className={cells[num]} onClick={() => handleClick(num)}></td>;
-        } else {
-            return <td className={cells[num]} onClick={() => handleClick(num)}></td>;
+    const Cell = ({ num,color }) => {
+        if (((num % 2)) == 0 ) {
+            if (cells[num])
+                return <td className={cells[num]} onClick={() => handleClick(num,color = cells[num])}></td>;
+            else{
+                return <td className={cells[num]} onClick={() => handleClick(num,color = 'whitecell')}></td>;
+            }
+        } 
+        else if (((num % 2)) == 1 ) { 
+            if (cells[num])
+                return <td className={cells[num]} onClick={() => handleClick(num,color = cells[num])}></td>;
+            else{
+                return <td className={cells[num]} onClick={() => handleClick(num,color = 'whitecell')}></td>;
+            }
+        } 
+        else { 
+
         }
-        //return <td  onClick={() => handleClick(num)}></td>;
     };
     return (
 
